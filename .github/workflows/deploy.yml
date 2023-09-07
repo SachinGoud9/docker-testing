@@ -23,10 +23,10 @@ jobs:
             uses: docker/login-action@v1
             with:
               registry: ghcr.io
-              username: ${{github.actor}}
-              password: ${{secrets.GITHUB_TOKEN}}
+              username: SachinGoud9
+              password: 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
 
           - name: 'Build Inventory Image'
             run: |
-              docker build . --tag ghcr.io/<your-GitHub-username>/store:latest
-              docker push ghcr.io/<your-GitHub-username>/store:latest
+              docker build . --tag ghcr.io/SachinGoud9/store:latest
+              docker push ghcr.io/SachinGoud9/store:latest

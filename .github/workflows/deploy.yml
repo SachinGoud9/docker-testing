@@ -26,5 +26,5 @@ jobs:
     - name: Build and Push Docker image
       run: |
         docker buildx create --use
-        docker buildx build -t ghcr.io/sachingoud9/dockertesting:latest -f Dockerfile .
-        docker push ghcr.io/sachingoud9/dockertesting:latest
+        docker buildx build -t ghcr.io/sachingoud9/docker-testing:latest -f Dockerfile .
+        docker push ghcr.io/sachingoud9/docker-testing:latest

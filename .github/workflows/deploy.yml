@@ -26,7 +26,7 @@ jobs:
     - name: Build and Push Docker image
       run: |
         docker buildx create --use
-        docker buildx build -t ghcr.io/${{ github.repository_owner }}/docker-testing:latest . --push
+        docker buildx build -t ghcr.io/sachingoud9/docker-testing:latest . --push
 
 
 

@@ -22,11 +22,6 @@ jobs:
         registry: ghcr.io
         username: ${{github.actor}}
         password: ${{secrets.DOCKER_TOKEN}}
-    - name: set lower case owner name
-      run: |
-        echo "OWNER_LC=${OWNER,,}" >>${GITHUB_ENV}
-      env:
-        OWNER: '${{ github.repository_owner }}'
 
     - name: Build and Push Docker image
       run: |

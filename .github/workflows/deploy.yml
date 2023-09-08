@@ -1,40 +1,3 @@
-# name: Deploy Images to GHCR
-
-# env:
-#   DOTNET_VERSION: '6.0.x'
-
-# on:
-#   push:
-#     branches:
-#       - main
-#   workflow_dispatch:
-
-# jobs:
-#       push-store-image:
-#         runs-on: ubuntu-latest
-#         defaults:
-#           run:
-#             working-directory: './Store'
-#         steps:
-#           - name: 'Checkout GitHub Action'
-#             uses: actions/checkout@main
-
-#           - name: 'Login to GitHub Container Registry'
-#             run: |
-#               echo $CR_PAT | docker login ghcr.io -u SachinGoud9 --password-stdin
-#           #   uses: docker/login-action@v1
-#           #   with:
-#           #     registry: ghcr.io
-#           #     username: SachinGoud9
-#           #     password: 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
-
-#           - name: 'Build Inventory Image'
-#             run: |
-#               docker build . --tag ghcr.io/SachinGoud9/store:latest
-#               docker push ghcr.io/SachinGoud9/store:latest
-
-
-
 name: Docker Build and Push
 
 on:
@@ -59,9 +22,14 @@ jobs:
         registry: ghcr.io
         username: ${{github.actor}}
         password: ${{secrets.DOCKER_TOKEN}}
+    - name: set lower case owner name
+      run: |
+        echo "OWNER_LC=${OWNER,,}" >>${GITHUB_ENV}
+      env:
+        OWNER: '${{ github.repository_owner }}'
 
     - name: Build and Push Docker image
       run: |
         docker buildx create --use
-        docker buildx build -t ghcr.io/${{ github.repository }}:latest -f Dockerfile .
+        docker buildx build -t ghcr.io/${{ OWNER_LC }}:latest -f Dockerfile .
         docker push ghcr.io/${{ github.repository }}:latest
